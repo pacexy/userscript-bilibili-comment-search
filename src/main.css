@@ -1,0 +1,42 @@
+.comment-search-input {
+  padding: 5px 10px;
+  border: 1px solid var(--Ga1);
+  border-radius: 4px;
+  background-color: var(--bg3);
+  color: var(--text1);
+  outline: none;
+}
+
+/* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/.comment-search-dialog#advanced_example */
+.comment-search-dialog:modal {
+  position: fixed;
+  inset-block-start: 0px;
+  inset-block-end: 0px;
+  max-width: calc((100% - 6px) - 2em);
+  max-height: calc((100% - 6px) - 2em);
+  user-select: text;
+  visibility: visible;
+  top-layer: browser !important;
+  overflow: auto;
+}
+
+.comment-search-dialog[open] {
+  display: block;
+}
+
+.comment-search-dialog {
+  display: none;
+  position: absolute;
+  inset-inline-start: 0px;
+  inset-inline-end: 0px;
+  width: fit-content;
+  height: fit-content;
+  background-color: canvas;
+  color: canvastext;
+  margin: auto;
+  border-width: initial;
+  border-style: solid;
+  border-color: initial;
+  border-image: initial;
+  padding: 1em;
+}

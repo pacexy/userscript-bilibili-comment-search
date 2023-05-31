@@ -7,10 +7,15 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        icon: 'https://vitejs.dev/logo.svg',
+        icon: 'https://www.bilibili.com/favicon.ico',
         namespace: 'npm/vite-plugin-monkey',
-        match: ['https://www.google.com/'],
+        match: [
+          '*://www.bilibili.com/video/av*',
+          '*://www.bilibili.com/bangumi/play/ep*',
+          '*://www.bilibili.com/bangumi/play/ss*',
+          '*://www.bilibili.com/video/BV*',
+        ],
       },
     }),
   ],
-});
+})
