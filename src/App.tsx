@@ -57,13 +57,19 @@ const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
   return (
     <ul>
       {comments?.map((comment) => (
-        <li key={comment.rpid} className='comment-item'>
+        <li
+          key={comment.rpid}
+          className='comment-item'
+          style={{
+            marginTop: sub ? '10px' : '20px',
+          }}
+        >
           <img
             src={comment.member.avatar}
             className='comment-item-avatar'
             style={{
-              width: sub ? '30px' : '40px',
-              height: sub ? '30px' : '40px',
+              width: sub ? '28px' : '40px',
+              height: sub ? '28px' : '40px',
             }}
           />
           <div
