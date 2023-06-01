@@ -2,27 +2,28 @@ import { fetchComments } from './api'
 import './main.css'
 import { Reply } from './reply'
 
+let promise: Promise<Reply[]> | null = null
+
 function run() {
   const ul = document.querySelector('ul.nav-bar')
 
   if (ul) {
     const li = document.createElement('li')
-    const input = document.createElement('input')
+    const button = document.createElement('button')
     const dialog = createDialog()
 
     li.style.marginLeft = 'auto'
-    input.placeholder = '搜索评论'
-    input.classList.add('comment-search-input')
+    button.textContent = '搜索评论'
 
-    input.addEventListener('keydown', (e) => {
-      if (e.code === 'Enter') {
-        e.preventDefault()
-        showComments(dialog, (e.currentTarget as HTMLInputElement).value)
-      }
+    button.addEventListener('click', (e) => {
+      e.preventDefault()
+      dialog.showModal()
+      const videoId = extractVideoId(window.location.href)
+      promise = fetchComments(videoId)
     })
 
     li.appendChild(dialog)
-    li.appendChild(input)
+    li.appendChild(button)
     ul.appendChild(li)
   }
 }
@@ -32,6 +33,16 @@ function createDialog() {
   const closeButton = document.createElement('button')
   const commentList = document.createElement('ul')
 
+  const input = document.createElement('input')
+  input.placeholder = '搜索评论'
+  input.classList.add('comment-search-input')
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      showComments(dialog, (e.target as HTMLInputElement).value)
+    }
+  })
+
   dialog.classList.add('comment-search-dialog')
 
   closeButton.textContent = 'Close'
@@ -40,23 +51,26 @@ function createDialog() {
   })
 
   dialog.appendChild(closeButton)
+  dialog.appendChild(input)
   dialog.appendChild(commentList)
 
   return dialog
 }
 
 async function showComments(dialog: HTMLDialogElement, input: string) {
-  dialog.showModal()
-  const videoId = extractVideoId(window.location.href)
-  const allComments = await fetchComments(videoId)
+  const allComments = await promise!
   const comments = allComments.filter((comment) =>
     comment.content.message.includes(input)
   )
 
   const commentList = dialog.querySelector('ul')
+  const fragment = document.createDocumentFragment()
+
   comments.forEach((comment) => {
-    commentList?.appendChild(createCommentElement(comment))
+    fragment.appendChild(createCommentElement(comment))
   })
+
+  commentList?.replaceChildren(fragment)
 }
 
 function createCommentElement(comment: Reply) {
