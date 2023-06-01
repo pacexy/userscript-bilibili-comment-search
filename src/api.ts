@@ -1,7 +1,14 @@
+import { Reply } from './reply'
+
+const replies: Reply[] = []
+
 export async function fetchComments(videoId: string) {
+  if (replies.length > 0) { 
+    return replies
+  }
+
   const pageSize = 40
   let page = 1
-  let replies: Reply[] = []
 
   while (true) {
     const params = new URLSearchParams({
@@ -26,7 +33,7 @@ export async function fetchComments(videoId: string) {
       throw new Error(`Failed to fetch comments: ${data.message}`)
     }
 
-    replies = replies.concat(data.data.replies ?? [])
+    replies.push(...(data.data.replies ?? []))
 
     if (page * pageSize >= data.data.page.count) {
       break
@@ -86,10 +93,6 @@ interface Config {
    * 是否显示删除记录
    */
   show_del_log: boolean
-}
-
-interface Reply {
-  // Define properties for each comment item
 }
 
 interface Hot {

@@ -39,4 +39,28 @@
   border-color: initial;
   border-image: initial;
   padding: 1em;
+  overscroll-behavior: contain
+}
+
+.comment {
+  display: flex;
+  margin-top: 10px;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--Ga1);
+  margin-right: 10px;
+}
+
+.comment-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-username {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
