@@ -13,7 +13,9 @@ export default function App() {
   return (
     <div>
       <dialog ref={dialogRef}>
-        <button onClick={() => dialogRef.current?.close()}>Close</button>
+        <div className='header'>
+          <button onClick={() => dialogRef.current?.close()}>X</button>
+        </div>
         <input
           placeholder='搜索评论'
           onKeyDown={async (e) => {

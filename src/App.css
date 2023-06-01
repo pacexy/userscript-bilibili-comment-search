@@ -2,13 +2,11 @@
   margin-left: auto;
 }
 
-#comment-search-root input {
-  padding: 5px 10px;
-  border: 1px solid var(--Ga1);
+#comment-search-root button {
+  margin-left: auto;
+  border: none;
+  padding: 4px 8px;
   border-radius: 4px;
-  background-color: var(--bg3);
-  color: var(--text1);
-  outline: none;
 }
 
 /* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/.comment-search-dialog#advanced_example */
@@ -21,7 +19,6 @@
   user-select: text;
   visibility: visible;
   top-layer: browser !important;
-  overflow: auto;
 }
 
 #comment-search-root dialog[open] {
@@ -33,22 +30,42 @@
   position: absolute;
   inset-inline-start: 0px;
   inset-inline-end: 0px;
-  width: fit-content;
-  height: fit-content;
+  width: 800px;
   background-color: canvas;
   color: canvastext;
   margin: auto;
-  border-width: initial;
-  border-style: solid;
-  border-color: initial;
-  border-image: initial;
   padding: 1em;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  overflow: hidden;
+}
+
+#comment-search-root dialog .header {
+  display: flex;
+  align-items: center;
+}
+
+#comment-search-root dialog input {
+  padding: 5px 10px;
+  border: 1px solid var(--Ga1);
+  border-radius: 4px;
+  background-color: var(--bg3);
+  color: var(--text1);
+  outline: none;
+  width: 100%;
+  margin: 20px 0;
+}
+
+#comment-search-root dialog ul {
+  height: 500px;
+  overflow: auto;
   overscroll-behavior: contain;
 }
 
 #comment-search-root .comment-item {
   display: flex;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 #comment-search-root .comment-item-avatar {
@@ -65,6 +82,13 @@
 }
 
 #comment-search-root .comment-item-username {
+  font-size: 12px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  color: #61666d;
+}
+
+#comment-search-root .comment-item-message {
+  font-size: 14px;
+  color: var(--text1);
 }
