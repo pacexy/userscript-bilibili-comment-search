@@ -1,3 +1,7 @@
+#comment-search-root {
+  margin-left: auto;
+}
+
 .comment-search-input {
   padding: 5px 10px;
   border: 1px solid var(--Ga1);
@@ -39,7 +43,7 @@
   border-color: initial;
   border-image: initial;
   padding: 1em;
-  overscroll-behavior: contain
+  overscroll-behavior: contain;
 }
 
 .comment {

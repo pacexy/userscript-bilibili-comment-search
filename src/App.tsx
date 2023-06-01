@@ -1,113 +1,58 @@
+import { useRef, useState } from 'react'
 import { fetchComments } from './api'
-import './main.css'
 import { Reply } from './reply'
+import { extractVideoId } from './utils'
+
+import './App.css'
 
 let promise: Promise<Reply[]> | null = null
 
 export default function App() {
-  return null
-}
-
-function run() {
-  const ul = document.querySelector('ul.nav-bar')
-
-  if (ul) {
-    const li = document.createElement('li')
-    const button = document.createElement('button')
-    const dialog = createDialog()
-
-    li.style.marginLeft = 'auto'
-    button.textContent = '搜索评论'
-
-    button.addEventListener('click', (e) => {
-      e.preventDefault()
-      dialog.showModal()
-      const videoId = extractVideoId(window.location.href)
-      promise = fetchComments(videoId)
-    })
-
-    li.appendChild(dialog)
-    li.appendChild(button)
-    ul.appendChild(li)
-  }
-}
-
-function createDialog() {
-  const dialog = document.createElement('dialog')
-  const closeButton = document.createElement('button')
-  const commentList = document.createElement('ul')
-
-  const input = document.createElement('input')
-  input.placeholder = '搜索评论'
-  input.classList.add('comment-search-input')
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      showComments(dialog, (e.target as HTMLInputElement).value)
-    }
-  })
-
-  dialog.classList.add('comment-search-dialog')
-
-  closeButton.textContent = 'Close'
-  closeButton.addEventListener('click', () => {
-    dialog.close()
-  })
-
-  dialog.appendChild(closeButton)
-  dialog.appendChild(input)
-  dialog.appendChild(commentList)
-
-  return dialog
-}
-
-async function showComments(dialog: HTMLDialogElement, input: string) {
-  const allComments = await promise!
-  const comments = allComments.filter((comment) =>
-    comment.content.message.includes(input)
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const [comments, setComments] = useState<Reply[]>()
+  return (
+    <div>
+      <dialog ref={dialogRef} className='comment-search-dialog'>
+        <button onClick={() => dialogRef.current?.close()}>Close</button>
+        <input
+          className='comment-search-input'
+          placeholder='搜索评论'
+          onKeyDown={async (e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              // `e.currentTarget` will be null after `await`
+              const keyword = e.currentTarget.value
+              const allComments = await promise!
+              const comments = allComments.filter((comment) =>
+                comment.content.message.includes(keyword)
+              )
+              setComments(comments)
+            }
+          }}
+        />
+        <ul>
+          {comments?.map((comment) => (
+            <li key={comment.rpid} className='comment'>
+              <img src={comment.member.avatar} className='comment-avatar' />
+              <div className='comment-content'>
+                <span className='comment-username'>{comment.member.uname}</span>
+                <span className='comment-message'>
+                  {comment.content.message}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </dialog>
+      <button
+        onClick={() => {
+          dialogRef.current?.showModal()
+          const videoId = extractVideoId(window.location.href)
+          promise = fetchComments(videoId)
+        }}
+      >
+        搜索评论
+      </button>
+    </div>
   )
-
-  const commentList = dialog.querySelector('ul')
-  const fragment = document.createDocumentFragment()
-
-  comments.forEach((comment) => {
-    fragment.appendChild(createCommentElement(comment))
-  })
-
-  commentList?.replaceChildren(fragment)
 }
-
-function createCommentElement(comment: Reply) {
-  const li = document.createElement('li')
-
-  const avatar = document.createElement('img')
-  avatar.src = comment.member.avatar
-  avatar.classList.add('comment-avatar')
-
-  const username = document.createElement('span')
-  username.textContent = comment.member.uname
-  username.classList.add('comment-username')
-
-  const message = document.createElement('span')
-  message.textContent = comment.content.message
-  message.classList.add('comment-message')
-
-  const content = document.createElement('div')
-  content.appendChild(username)
-  content.appendChild(message)
-  content.classList.add('comment-content')
-
-  li.appendChild(avatar)
-  li.appendChild(content)
-  li.classList.add('comment')
-  return li
-}
-
-function extractVideoId(url: string) {
-  const match = url.match(/\/video\/(BV\w+)\//)
-  if (!match) {
-    throw new Error(`Failed to extract video id from url: ${url}`)
-  }
-  return match[1]
-}
-

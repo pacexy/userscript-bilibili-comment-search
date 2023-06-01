@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { name } from '../package.json'
 import App from './App'
 import { assertEl, debug } from './utils'
 
 function run() {
   debug('run')
-
-  let root = document.querySelector(`#${name}`)
+  const id = 'comment-search-root'
+  let root = document.querySelector(`#${id}`)
   if (root) {
     debug('root exists')
     return
@@ -15,9 +14,10 @@ function run() {
 
   const container = assertEl(document.querySelector('ul.nav-bar'))
   root = document.createElement('li')
-  root.id = name
+  root.id = id
   container.append(root)
 
+  debug('render')
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
       <App />
