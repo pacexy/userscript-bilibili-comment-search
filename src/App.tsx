@@ -4,6 +4,10 @@ import { Reply } from './reply'
 
 let promise: Promise<Reply[]> | null = null
 
+export default function App() {
+  return null
+}
+
 function run() {
   const ul = document.querySelector('ul.nav-bar')
 
@@ -107,4 +111,3 @@ function extractVideoId(url: string) {
   return match[1]
 }
 
-window.addEventListener('load', run)
