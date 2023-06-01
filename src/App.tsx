@@ -50,22 +50,38 @@ export default function App() {
 
 interface CommentProps {
   comments?: Reply[]
+  sub?: boolean
 }
-const CommentTree: React.FC<CommentProps> = ({ comments }) => {
+const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
   if (!comments) return null
   return (
     <ul>
       {comments?.map((comment) => (
         <li key={comment.rpid} className='comment-item'>
-          <img src={comment.member.avatar} className='comment-item-avatar' />
-          <div className='comment-item-content'>
+          <img
+            src={comment.member.avatar}
+            className='comment-item-avatar'
+            style={{
+              width: sub ? '30px' : '40px',
+              height: sub ? '30px' : '40px',
+            }}
+          />
+          <div
+            className='comment-item-content'
+            style={{
+              ...(!sub && {
+                display: 'flex',
+                flexDirection: 'column',
+              }),
+            }}
+          >
             <span className='comment-item-username'>
               {comment.member.uname}
             </span>
             <span className='comment-item-message'>
               {comment.content.message}
             </span>
-            <CommentTree comments={comment.replies} />
+            <CommentTree comments={comment.replies} sub />
           </div>
         </li>
       ))}
