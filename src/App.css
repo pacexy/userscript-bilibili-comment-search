@@ -2,7 +2,7 @@
   margin-left: auto;
 }
 
-.comment-search-input {
+#comment-search-root input {
   padding: 5px 10px;
   border: 1px solid var(--Ga1);
   border-radius: 4px;
@@ -12,7 +12,7 @@
 }
 
 /* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/.comment-search-dialog#advanced_example */
-.comment-search-dialog:modal {
+#comment-search-root dialog:modal {
   position: fixed;
   inset-block-start: 0px;
   inset-block-end: 0px;
@@ -24,11 +24,11 @@
   overflow: auto;
 }
 
-.comment-search-dialog[open] {
+#comment-search-root dialog[open] {
   display: block;
 }
 
-.comment-search-dialog {
+#comment-search-root dialog {
   display: none;
   position: absolute;
   inset-inline-start: 0px;
@@ -46,12 +46,12 @@
   overscroll-behavior: contain;
 }
 
-.comment {
+#comment-search-root .comment-item {
   display: flex;
   margin-top: 10px;
 }
 
-.comment-avatar {
+#comment-search-root .comment-item-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -59,12 +59,12 @@
   margin-right: 10px;
 }
 
-.comment-content {
+#comment-search-root .comment-item-content {
   display: flex;
   flex-direction: column;
 }
 
-.comment-username {
+#comment-search-root .comment-item-username {
   font-weight: bold;
   margin-bottom: 5px;
 }

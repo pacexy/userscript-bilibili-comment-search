@@ -12,10 +12,9 @@ export default function App() {
   const [comments, setComments] = useState<Reply[]>()
   return (
     <div>
-      <dialog ref={dialogRef} className='comment-search-dialog'>
+      <dialog ref={dialogRef}>
         <button onClick={() => dialogRef.current?.close()}>Close</button>
         <input
-          className='comment-search-input'
           placeholder='搜索评论'
           onKeyDown={async (e) => {
             if (e.key === 'Enter') {
@@ -32,11 +31,16 @@ export default function App() {
         />
         <ul>
           {comments?.map((comment) => (
-            <li key={comment.rpid} className='comment'>
-              <img src={comment.member.avatar} className='comment-avatar' />
-              <div className='comment-content'>
-                <span className='comment-username'>{comment.member.uname}</span>
-                <span className='comment-message'>
+            <li key={comment.rpid} className='comment-item'>
+              <img
+                src={comment.member.avatar}
+                className='comment-item-avatar'
+              />
+              <div className='comment-item-content'>
+                <span className='comment-item-username'>
+                  {comment.member.uname}
+                </span>
+                <span className='comment-item-message'>
                   {comment.content.message}
                 </span>
               </div>
