@@ -57,7 +57,7 @@
   margin: 20px 0;
 }
 
-#comment-search-root dialog ul {
+#comment-search-root dialog .comment-tree {
   height: 500px;
   overflow: auto;
   overscroll-behavior: contain;

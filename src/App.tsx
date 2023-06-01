@@ -31,24 +31,9 @@ export default function App() {
             }
           }}
         />
-        <ul>
-          {comments?.map((comment) => (
-            <li key={comment.rpid} className='comment-item'>
-              <img
-                src={comment.member.avatar}
-                className='comment-item-avatar'
-              />
-              <div className='comment-item-content'>
-                <span className='comment-item-username'>
-                  {comment.member.uname}
-                </span>
-                <span className='comment-item-message'>
-                  {comment.content.message}
-                </span>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className='comment-tree'>
+          <CommentTree comments={comments} />
+        </div>
       </dialog>
       <button
         onClick={() => {
@@ -60,5 +45,30 @@ export default function App() {
         搜索评论
       </button>
     </div>
+  )
+}
+
+interface CommentProps {
+  comments?: Reply[]
+}
+const CommentTree: React.FC<CommentProps> = ({ comments }) => {
+  if (!comments) return null
+  return (
+    <ul>
+      {comments?.map((comment) => (
+        <li key={comment.rpid} className='comment-item'>
+          <img src={comment.member.avatar} className='comment-item-avatar' />
+          <div className='comment-item-content'>
+            <span className='comment-item-username'>
+              {comment.member.uname}
+            </span>
+            <span className='comment-item-message'>
+              {comment.content.message}
+            </span>
+            <CommentTree comments={comment.replies} />
+          </div>
+        </li>
+      ))}
+    </ul>
   )
 }
