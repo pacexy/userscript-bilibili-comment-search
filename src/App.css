@@ -89,3 +89,8 @@
   font-size: 14px;
   color: var(--text1);
 }
+
+#comment-search-root .comment-item-time {
+  color: var(--text3);
+  margin-top: 4px;
+}

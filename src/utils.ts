@@ -20,3 +20,15 @@ export function extractVideoId(url: string) {
   }
   return match[1]
 }
+
+export function formatDateTime(ts: number) {
+  const date = new Date(ts * 1000)
+  return date.toLocaleString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  })
+}

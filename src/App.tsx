@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { fetchComments } from './api'
 import { Reply } from './reply'
-import { extractVideoId } from './utils'
+import { extractVideoId, formatDateTime } from './utils'
 
 import './App.css'
 
@@ -81,6 +81,9 @@ const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
             <span className='comment-item-message'>
               {comment.content.message}
             </span>
+            <div className='comment-item-time'>
+              {formatDateTime(comment.ctime)}
+            </div>
             <CommentTree comments={comment.replies} sub />
           </div>
         </li>
