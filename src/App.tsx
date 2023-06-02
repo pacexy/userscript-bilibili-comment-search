@@ -20,6 +20,7 @@ export default function App() {
           <button onClick={() => dialogRef.current?.close()}>X</button>
         </div>
         <input
+          autoFocus
           placeholder='搜索评论'
           onKeyDown={(e) => {
             if (e.key === 'Enter' && promiseRef.current) {
