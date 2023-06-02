@@ -5,11 +5,11 @@ import { extractVideoId, formatDateTime } from './utils'
 
 import './App.css'
 
-let promise: Promise<Reply[]> | null = null
-
 export default function App() {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [comments, setComments] = useState<Reply[]>()
+  const promiseRef = useRef<Promise<Reply[]> | null>(null)
+
   return (
     <div>
       <dialog ref={dialogRef}>
@@ -19,11 +19,11 @@ export default function App() {
         <input
           placeholder='搜索评论'
           onKeyDown={async (e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && promiseRef.current) {
               e.preventDefault()
               // `e.currentTarget` will be null after `await`
               const keyword = e.currentTarget.value
-              const allComments = await promise!
+              const allComments = await promiseRef.current
               const comments = searchComments(allComments, keyword)
               setComments(comments)
             }
@@ -37,7 +37,7 @@ export default function App() {
         onClick={() => {
           dialogRef.current?.showModal()
           const videoId = extractVideoId(window.location.href)
-          promise = fetchComments(videoId)
+          promiseRef.current = fetchComments(videoId)
         }}
       >
         搜索评论
