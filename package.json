@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-highlight-words": "^0.20.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.7",
     "@types/react-dom": "^18.2.4",
+    "@types/react-highlight-words": "^0.16.4",
     "@vitejs/plugin-react": "^4.0.0",
     "typescript": "^5.0.4",
     "vite": "^4.3.9",

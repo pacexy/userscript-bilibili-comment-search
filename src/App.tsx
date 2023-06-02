@@ -1,9 +1,12 @@
 import { useRef, useState } from 'react'
+import Highlighter from 'react-highlight-words'
 import { fetchComments } from './api'
 import { Reply } from './reply'
 import { extractVideoId, formatDateTime } from './utils'
 
 import './App.css'
+
+let keyword = ''
 
 export default function App() {
   const dialogRef = useRef<HTMLDialogElement>(null)
@@ -22,10 +25,11 @@ export default function App() {
             if (e.key === 'Enter' && promiseRef.current) {
               e.preventDefault()
               // `e.currentTarget` will be null after `await`
-              const keyword = e.currentTarget.value
+              const _keyword = e.currentTarget.value
+              keyword = _keyword
               promiseRef.current
                 .then((allComments) => {
-                  const comments = searchComments(allComments, keyword)
+                  const comments = searchComments(allComments, _keyword)
                   setComments(comments)
                 })
                 .catch((e) => {
@@ -87,9 +91,13 @@ const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
             <span className='comment-item-username'>
               {comment.member.uname}
             </span>
-            <span className='comment-item-message'>
-              {comment.content.message}
-            </span>
+            <Highlighter
+              className='comment-item-message'
+              highlightClassName='comment-item-highlight'
+              searchWords={[keyword]}
+              autoEscape={true}
+              textToHighlight={comment.content.message}
+            />
             <div className='comment-item-time'>
               {formatDateTime(comment.ctime)}
             </div>
