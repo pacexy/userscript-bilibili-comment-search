@@ -25,12 +25,10 @@ export default function App() {
           onKeyDown={(e) => {
             if (e.key === 'Enter' && promiseRef.current) {
               e.preventDefault()
-              // `e.currentTarget` will be null after `await`
-              const _keyword = e.currentTarget.value
-              keyword = _keyword
+              keyword = e.currentTarget.value
               promiseRef.current
                 .then((allComments) => {
-                  const comments = searchComments(allComments, _keyword)
+                  const comments = searchComments(allComments)
                   setComments(comments)
                 })
                 .catch((e) => {
@@ -112,7 +110,7 @@ const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
   )
 }
 
-function searchComments(allComments: Reply[], keyword: string) {
+function searchComments(allComments: Reply[]) {
   return allComments.filter((comment) => {
     return (
       comment.content.message.includes(keyword) ||
