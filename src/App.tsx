@@ -24,9 +24,7 @@ export default function App() {
               // `e.currentTarget` will be null after `await`
               const keyword = e.currentTarget.value
               const allComments = await promise!
-              const comments = allComments.filter((comment) =>
-                comment.content.message.includes(keyword)
-              )
+              const comments = searchComments(allComments, keyword)
               setComments(comments)
             }
           }}
@@ -49,7 +47,7 @@ export default function App() {
 }
 
 interface CommentProps {
-  comments?: Reply[]
+  comments?: Reply[] | null
   sub?: boolean
 }
 const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
@@ -96,4 +94,13 @@ const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
       ))}
     </ul>
   )
+}
+
+function searchComments(allComments: Reply[], keyword: string) {
+  return allComments.filter((comment) => {
+    return (
+      comment.content.message.includes(keyword) ||
+      comment.replies?.some((reply) => reply.content.message.includes(keyword))
+    )
+  })
 }

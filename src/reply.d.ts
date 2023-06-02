@@ -19,7 +19,7 @@ export interface Reply {
   action: number
   member: Member
   content: Content
-  replies: Reply[]
+  replies: Reply[] | null
   assist: number
   up_action: UpAction
   invisible: boolean
