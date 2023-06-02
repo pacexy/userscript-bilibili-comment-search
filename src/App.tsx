@@ -15,7 +15,20 @@ export default function App() {
 
   return (
     <div>
-      <dialog ref={dialogRef}>
+      <dialog
+        ref={dialogRef}
+        onClick={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect()
+          if (
+            e.clientY < rect.top ||
+            e.clientY > rect.bottom ||
+            e.clientX < rect.left ||
+            e.clientX > rect.right
+          ) {
+            e.currentTarget.close()
+          }
+        }}
+      >
         <div className='header'>
           <button onClick={() => dialogRef.current?.close()}>X</button>
         </div>
