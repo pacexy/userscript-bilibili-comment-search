@@ -71,6 +71,7 @@
   border-radius: 50%;
   background-color: var(--Ga1);
   margin-right: 10px;
+  flex-shrink: 0;
 }
 
 #comment-search-root .comment-item-content {
