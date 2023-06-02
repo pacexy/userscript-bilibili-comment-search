@@ -18,14 +18,19 @@ export default function App() {
         </div>
         <input
           placeholder='搜索评论'
-          onKeyDown={async (e) => {
+          onKeyDown={(e) => {
             if (e.key === 'Enter' && promiseRef.current) {
               e.preventDefault()
               // `e.currentTarget` will be null after `await`
               const keyword = e.currentTarget.value
-              const allComments = await promiseRef.current
-              const comments = searchComments(allComments, keyword)
-              setComments(comments)
+              promiseRef.current
+                .then((allComments) => {
+                  const comments = searchComments(allComments, keyword)
+                  setComments(comments)
+                })
+                .catch((e) => {
+                  console.error(e)
+                })
             }
           }}
         />
@@ -54,7 +59,7 @@ const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
   if (!comments) return null
   return (
     <ul>
-      {comments?.map((comment) => (
+      {comments.map((comment) => (
         <li
           key={comment.rpid}
           className='comment-item'
