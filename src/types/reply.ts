@@ -287,36 +287,6 @@ interface Extra {
   goods_exposure_report: string
 }
 
-interface Reply {
-  rpid: number
-  oid: number
-  type: number
-  mid: number
-  root: number
-  parent: number
-  dialog: number
-  count: number
-  rcount: number
-  state: number
-  fansgrade: number
-  attr: number
-  ctime: number
-  rpid_str: string
-  root_str: string
-  parent_str: string
-  like: number
-  action: number
-  member: Member
-  content: Content
-  replies: any
-  assist: number
-  up_action: UpAction
-  invisible: boolean
-  reply_control: ReplyControl
-  folder: Folder
-  dynamic_id_str: string
-}
-
 interface UpAction {
   like: boolean
   reply: boolean

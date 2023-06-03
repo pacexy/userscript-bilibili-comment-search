@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words'
 import { fetchComments } from './api'
-import { Reply } from './reply'
+import { Reply } from './types/reply'
 import { extractVideoId, formatDateTime } from './utils'
 
 import './App.css'
