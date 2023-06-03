@@ -9,32 +9,13 @@
   border-radius: 4px;
 }
 
-/* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/.comment-search-dialog#advanced_example */
-#comment-search-root dialog:modal {
-  position: fixed;
-  inset-block-start: 0px;
-  inset-block-end: 0px;
-  max-width: calc((100% - 6px) - 2em);
-  max-height: calc((100% - 6px) - 2em);
-  user-select: text;
-  visibility: visible;
-  top-layer: browser !important;
-}
-
 #comment-search-root dialog[open] {
   display: block;
 }
 
 #comment-search-root dialog {
   display: none;
-  position: absolute;
-  inset-inline-start: 0px;
-  inset-inline-end: 0px;
   width: 800px;
-  background-color: canvas;
-  color: canvastext;
-  margin: auto;
-  padding: 1em;
   border-radius: 8px;
   border: none;
   outline: none;
