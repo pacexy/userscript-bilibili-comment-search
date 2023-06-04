@@ -9,6 +9,7 @@ export default defineConfig({
     monkey({
       entry: 'src/main.tsx',
       userscript: {
+        name: 'Bilibili Comment Search',
         icon: 'https://www.bilibili.com/favicon.ico',
         namespace: 'npm/vite-plugin-monkey',
         match: [
