@@ -10,6 +10,7 @@ let keyword = ''
 
 export default function App() {
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const [comments, setComments] = useState<Reply[]>()
   const promiseRef = useRef<Promise<Reply[]> | null>(null)
 
@@ -33,7 +34,7 @@ export default function App() {
           <button onClick={() => dialogRef.current?.close()}>X</button>
         </div>
         <input
-          autoFocus
+          ref={inputRef}
           placeholder='搜索评论'
           onKeyDown={(e) => {
             if (e.key === 'Enter' && promiseRef.current) {
@@ -57,6 +58,7 @@ export default function App() {
       <button
         onClick={() => {
           dialogRef.current?.showModal()
+          inputRef.current?.focus()
           const videoId = extractVideoId(window.location.href)
           promiseRef.current = fetchComments(videoId)
         }}
