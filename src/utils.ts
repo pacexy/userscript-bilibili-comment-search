@@ -8,9 +8,7 @@ export function assertEl<T extends Element>(el: T | null) {
 }
 
 export function debug(message: any) {
-  if (import.meta.env.DEV) {
-    console.log(`[${name}] ${message}`)
-  }
+  console.log(`[${name}] ${message}`)
 }
 
 export function extractVideoId(url: string) {

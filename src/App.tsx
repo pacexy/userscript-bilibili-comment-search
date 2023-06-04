@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words'
-import { fetchComments } from './api'
+import { PAGE_LIMIT, fetchComments } from './api'
 import { Reply } from './types/reply'
 import { extractVideoId, formatDateTime } from './utils'
 
@@ -51,6 +51,7 @@ export default function App() {
             }
           }}
         />
+        <div className='note'>Note: 由于性能和 Rate Limit 的原因，目前仅会加载 {PAGE_LIMIT} 页评论，即 {PAGE_LIMIT} * 49 条评论，及其至多 3 条子评论。</div>
         <div className='comment-tree'>
           <CommentTree comments={comments} />
         </div>

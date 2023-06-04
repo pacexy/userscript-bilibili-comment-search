@@ -1,8 +1,9 @@
 import { CommentDetailsResponse, CommentSort, CommentType } from './types/api'
 import { Reply } from './types/reply'
+import { debug } from './utils'
 
 // for performance and rate limit, we only fetch the first 20 pages
-const PAGE_LIMIT = 20
+export const PAGE_LIMIT = 20
 const replies: Reply[] = []
 
 export async function fetchComments(videoId: string) {
@@ -22,6 +23,7 @@ export async function fetchComments(videoId: string) {
       ps: pageSize.toString(),
     })
 
+    debug(`fetch comments: page ${page}`)
     const response = await fetch(
       `https://api.bilibili.com/x/v2/reply?${params}`
     )

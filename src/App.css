@@ -35,7 +35,12 @@
   color: var(--text1);
   outline: none;
   width: 100%;
-  margin: 20px 0;
+  margin-top: 20px;
+}
+
+#comment-search-root dialog .note {
+  color: var(--text3);
+  margin: 10px 0;
 }
 
 #comment-search-root dialog .comment-tree {
