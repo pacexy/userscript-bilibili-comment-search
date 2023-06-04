@@ -16,6 +16,8 @@
 #comment-search-root dialog {
   display: none;
   width: 800px;
+  margin: auto;
+  padding: 1em;
   border-radius: 8px;
   border: none;
   outline: none;
