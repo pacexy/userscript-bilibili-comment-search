@@ -25,4 +25,13 @@ function run() {
   )
 }
 
-window.addEventListener('load', run)
+window.addEventListener('load', () => {
+  const timer = setInterval(() => {
+    try {
+      run()
+      clearInterval(timer)
+    } catch (error) {
+      // ignore
+    }
+  }, 500)
+})
