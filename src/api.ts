@@ -1,14 +1,16 @@
 import { CommentDetailsResponse, CommentSort, CommentType } from './types/api'
 import { Reply } from './types/reply'
 
+// for performance and rate limit, we only fetch the first 20 pages
+const PAGE_LIMIT = 20
 const replies: Reply[] = []
 
 export async function fetchComments(videoId: string) {
-  if (replies.length > 0) { 
+  if (replies.length > 0) {
     return replies
   }
 
-  const pageSize = 40
+  const pageSize = 49
   let page = 1
 
   while (true) {
@@ -36,7 +38,10 @@ export async function fetchComments(videoId: string) {
 
     replies.push(...(data.data.replies ?? []))
 
-    if (page * pageSize >= data.data.page.count) {
+    if (
+      page * pageSize >=
+      Math.min(PAGE_LIMIT * pageSize, data.data.page.count)
+    ) {
       break
     }
 
