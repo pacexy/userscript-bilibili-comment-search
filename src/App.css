@@ -23,10 +23,18 @@
   outline: none;
   overflow: hidden;
 }
-
 #comment-search-root dialog .header {
   display: flex;
   align-items: center;
+}
+
+#comment-search-root dialog .header h1 {
+  font-size: 15px;
+  color: var(--text1);
+}
+
+#comment-search-root dialog .header h1 span {
+  color: var(--text3);
 }
 
 #comment-search-root dialog input {

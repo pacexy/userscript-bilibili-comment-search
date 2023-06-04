@@ -3,6 +3,7 @@ import Highlighter from 'react-highlight-words'
 import { PAGE_LIMIT, fetchComments } from './api'
 import { Reply } from './types/reply'
 import { extractVideoId, formatDateTime } from './utils'
+import { version } from '../package.json'
 
 import './App.css'
 
@@ -31,6 +32,10 @@ export default function App() {
         }}
       >
         <div className='header'>
+          <h1>
+            Bilibili Comment Search {''}
+            <span>v{version}</span>
+          </h1>
           <button onClick={() => dialogRef.current?.close()}>X</button>
         </div>
         <input
@@ -51,7 +56,10 @@ export default function App() {
             }
           }}
         />
-        <div className='note'>Note: 由于性能和 Rate Limit 的原因，目前仅会加载 {PAGE_LIMIT} 页评论，即 {PAGE_LIMIT} * 49 条评论，及其至多 3 条子评论。</div>
+        <div className='note'>
+          Note: 由于性能和 Rate Limit 的原因，目前仅会加载 {PAGE_LIMIT}{' '}
+          页评论，即 {PAGE_LIMIT} * 49 条评论，及其至多 3 条子评论。
+        </div>
         <div className='comment-tree'>
           <CommentTree comments={comments} />
         </div>
