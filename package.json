@@ -2,7 +2,7 @@
   "name": "userscript-bilibili-comment-search",
   "private": true,
   "version": "0.1.0",
-  "description": "Support searching comments in Bilibili.",
+  "description": "Add comment searching support in Bilibili.",
   "type": "module",
   "packageManager": "pnpm@8.6.0",
   "author": "pacexy <pacexy@gmail.com>",
