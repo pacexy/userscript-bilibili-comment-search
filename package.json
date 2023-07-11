@@ -1,7 +1,7 @@
 {
   "name": "userscript-bilibili-comment-search",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Add comment searching support in Bilibili.",
   "type": "module",
   "packageManager": "pnpm@8.6.0",
