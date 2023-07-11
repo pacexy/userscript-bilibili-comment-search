@@ -11,7 +11,7 @@ export async function fetchComments(videoId: string) {
     return replies
   }
 
-  const pageSize = 49
+  const pageSize = 20
   let page = 1
 
   while (true) {

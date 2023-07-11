@@ -58,7 +58,7 @@ export default function App() {
         />
         <div className='note'>
           Note: 由于性能和 Rate Limit 的原因，目前仅会加载 {PAGE_LIMIT}{' '}
-          页评论，即 {PAGE_LIMIT} * 49 条评论，及其至多 3 条子评论。
+          页评论，即 {PAGE_LIMIT} * 20 条评论，及其至多 3 条子评论。
         </div>
         <div className='comment-tree'>
           <CommentTree comments={comments} />

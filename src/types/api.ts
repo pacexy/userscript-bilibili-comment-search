@@ -313,7 +313,7 @@ interface CommentRequestParams {
   /**
    * 每页项数
    * 默认为20
-   * 定义域：1-49
+   * 定义域：1-20
    */
   ps?: number
   /**
