@@ -25,7 +25,8 @@ export async function fetchComments(videoId: string) {
 
     debug(`fetch comments: page ${page}`)
     const response = await fetch(
-      `https://api.bilibili.com/x/v2/reply?${params}`
+      `https://api.bilibili.com/x/v2/reply?${params}`,
+      { credentials: 'include' }
     )
 
     const data: CommentDetailsResponse = await response.json()
