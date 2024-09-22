@@ -12,8 +12,8 @@ function run() {
     return
   }
 
-  const container = assertEl(document.querySelector('ul.nav-bar'))
-  root = document.createElement('li')
+  const container = assertEl(document.querySelector('#commentapp'))
+  root = document.createElement('div')
   root.id = id
   container.append(root)
 

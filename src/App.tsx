@@ -16,7 +16,7 @@ export default function App() {
   const promiseRef = useRef<Promise<Reply[]> | null>(null)
 
   return (
-    <div>
+    <>
       <dialog
         ref={dialogRef}
         onClick={(e) => {
@@ -74,7 +74,7 @@ export default function App() {
       >
         搜索评论
       </button>
-    </div>
+    </>
   )
 }
 
