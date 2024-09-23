@@ -15,7 +15,7 @@ function run() {
   const container = assertEl(document.querySelector('#commentapp'))
   root = document.createElement('div')
   root.id = id
-  container.append(root)
+  container.prepend(root)
 
   debug('render')
   ReactDOM.createRoot(root).render(
