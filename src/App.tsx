@@ -113,9 +113,13 @@ const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
                 }),
               }}
             >
-              <span className='comment-item-username'>
+              <a
+                className='comment-item-username'
+                href={`https://space.bilibili.com/${comment.member.mid}`}
+                target='_blank'
+              >
                 {comment.member.uname}
-              </span>
+              </a>
               <Highlighter
                 className='comment-item-message'
                 highlightClassName='comment-item-highlight'
