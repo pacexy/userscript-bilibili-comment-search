@@ -117,6 +117,7 @@ const CommentTree: React.FC<CommentProps> = ({ comments, sub = false }) => {
                 className='comment-item-username'
                 href={`https://space.bilibili.com/${comment.member.mid}`}
                 target='_blank'
+                data-vip={comment.member.vip.vipType}
               >
                 {comment.member.uname}
               </a>

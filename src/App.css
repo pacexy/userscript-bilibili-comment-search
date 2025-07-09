@@ -74,11 +74,13 @@
 }
 
 #comment-search-root .comment-item-username {
-  font-size: 12px;
-  font-weight: bold;
+  font-size: var(--bili-comments-font-size-name);
   margin-bottom: 4px;
-  color: #61666d;
   margin-right: 12px;
+  color: #FB7299;
+  &[data-vip='0'] {
+    color: var(--text2);
+  }
 }
 
 #comment-search-root .comment-item-message {
