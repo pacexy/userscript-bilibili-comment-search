@@ -16,10 +16,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+          cache: 'pnpm'
 
-      - run: npx changelogithub
+      - run: pnpm install
+      - run: pnpm run build
+
+      # Upload the userscript so Greasy Fork can auto-update it via webhook
+      # See: https://greasyfork.org/en/users/webhook-info
+      - run: npx changelogithub --assets dist/*.user.js
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
